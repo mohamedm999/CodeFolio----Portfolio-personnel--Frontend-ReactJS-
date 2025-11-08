@@ -4,7 +4,7 @@ import { onError } from '@apollo/client/link/error';
 
 // HTTP connection to the GraphQL API
 const httpLink = createHttpLink({
-  uri: (import.meta as any).env.VITE_API_URL || 'http://localhost:4000/graphql',
+  uri: import.meta.env.VITE_API_URL || 'http://localhost:4000/graphql',
 });
 
 // Authentication link - adds JWT token to headers
