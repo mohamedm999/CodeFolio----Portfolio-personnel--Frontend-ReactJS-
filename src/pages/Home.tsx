@@ -1,7 +1,7 @@
 import React from 'react';
 import { useQuery } from '@apollo/client';
 import { GET_PORTFOLIO } from '../graphql/portfolio';
-import { Portfolio } from '../types/graphql';
+import { Portfolio, Skill } from '../types/graphql';
 import { Loading } from '../components/ui/Loading';
 import { ErrorMessage } from '../components/ui/ErrorMessage';
 import { Card } from '../components/ui/Card';
@@ -136,8 +136,8 @@ export const Home: React.FC = () => {
                 if (!acc[skill.category]) acc[skill.category] = [];
                 acc[skill.category].push(skill);
                 return acc;
-              }, {} as Record<string, typeof skills>)
-            ).map(([category, categorySkills]) => (
+              }, {} as Record<string, Skill[]>)
+            ).map(([category, categorySkills]: [string, Skill[]]) => (
               <div key={category} className="mb-8">
                 <h3 className="text-2xl font-semibold mb-4 text-gray-900 dark:text-white">
                   {category}
