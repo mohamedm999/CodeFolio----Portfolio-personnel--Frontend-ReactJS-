@@ -12,9 +12,6 @@ export const GET_PROFILE = gql`
       email
       phone
       location
-      website
-      github
-      linkedin
       avatar
     }
   }
@@ -32,9 +29,6 @@ export const CREATE_PROFILE = gql`
       email
       phone
       location
-      website
-      github
-      linkedin
       avatar
     }
   }
@@ -50,9 +44,6 @@ export const UPDATE_PROFILE = gql`
       email
       phone
       location
-      website
-      github
-      linkedin
       avatar
     }
   }

@@ -10,10 +10,8 @@ export const GET_PROJECTS = gql`
       description
       technologies
       imageUrl
-      projectUrl
       githubUrl
       featured
-      order
       createdAt
     }
   }
@@ -29,10 +27,8 @@ export const CREATE_PROJECT = gql`
       description
       technologies
       imageUrl
-      projectUrl
       githubUrl
       featured
-      order
     }
   }
 `;
@@ -45,10 +41,8 @@ export const UPDATE_PROJECT = gql`
       description
       technologies
       imageUrl
-      projectUrl
       githubUrl
       featured
-      order
     }
   }
 `;

@@ -13,9 +13,6 @@ export const GET_PORTFOLIO = gql`
         email
         phone
         location
-        website
-        github
-        linkedin
         avatar
       }
       projects {
@@ -24,10 +21,8 @@ export const GET_PORTFOLIO = gql`
         description
         technologies
         imageUrl
-        projectUrl
         githubUrl
         featured
-        order
       }
       skills {
         id
@@ -35,18 +30,16 @@ export const GET_PORTFOLIO = gql`
         category
         level
         icon
-        order
       }
       experiences {
         id
-        title
-        company
-        location
-        startDate
-        endDate
-        current
+        poste
+        entreprise
+        lieu
+        dateDebut
+        dateFin
+        actuel
         description
-        order
       }
     }
   }

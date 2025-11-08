@@ -10,7 +10,6 @@ export const GET_SKILLS = gql`
       category
       level
       icon
-      order
     }
   }
 `;
@@ -25,7 +24,6 @@ export const CREATE_SKILL = gql`
       category
       level
       icon
-      order
     }
   }
 `;
@@ -38,7 +36,6 @@ export const UPDATE_SKILL = gql`
       category
       level
       icon
-      order
     }
   }
 `;
