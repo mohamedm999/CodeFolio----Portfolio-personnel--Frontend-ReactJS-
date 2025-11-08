@@ -1,30 +1,41 @@
-import { useState } from 'react'
-import './App.css'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { ApolloProvider } from '@apollo/client';
+import { client } from './apollo/client';
+import { AuthProvider } from './context/AuthContext';
+import { Home } from './pages/Home';
+import { Login } from './pages/Login';
+import { ProtectedRoute } from './components/ProtectedRoute';
+import './App.css';
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div className="container">
-        <h1>CodeFolio</h1>
-        <p className="subtitle">Portfolio Personnel - React + Vite</p>
-        
-        <div className="card">
-          <button onClick={() => setCount((count) => count + 1)}>
-            count is {count}
-          </button>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test HMR
-          </p>
-        </div>
-        
-        <p className="info">
-          Projet initialisé avec succès ! 🚀
-        </p>
-      </div>
-    </>
-  )
+    <ApolloProvider client={client}>
+      <AuthProvider>
+        <Router>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route
+              path="/admin/*"
+              element={
+                <ProtectedRoute>
+                  <div className="flex items-center justify-center min-h-screen">
+                    <div className="text-center">
+                      <h1 className="text-4xl font-bold mb-4">Admin Dashboard</h1>
+                      <p className="text-gray-600">Coming soon...</p>
+                      <p className="text-sm text-gray-500 mt-4">
+                        Admin CRUD interface will be implemented next
+                      </p>
+                    </div>
+                  </div>
+                </ProtectedRoute>
+              }
+            />
+          </Routes>
+        </Router>
+      </AuthProvider>
+    </ApolloProvider>
+  );
 }
 
-export default App
+export default App;
