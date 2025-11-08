@@ -4,6 +4,7 @@ import { client } from './apollo/client';
 import { AuthProvider } from './context/AuthContext';
 import { Home } from './pages/Home';
 import { Login } from './pages/Login';
+import { TestConnection } from './pages/TestConnection';
 import { ProtectedRoute } from './components/ProtectedRoute';
 import './App.css';
 
@@ -13,6 +14,7 @@ function App() {
       <AuthProvider>
         <Router>
           <Routes>
+            <Route path="/test" element={<TestConnection />} />
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route
