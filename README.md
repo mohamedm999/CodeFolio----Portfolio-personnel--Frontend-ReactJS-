@@ -2,6 +2,12 @@
 
 Portfolio professionnel développé avec React + Vite et intégration GraphQL Backend.
 
+## 🚀 First Time Here?
+
+**Start here:** [START_HERE.md](./START_HERE.md) - Quick setup guide
+
+**Having issues?** [TROUBLESHOOTING.md](./TROUBLESHOOTING.md) - Fix common problems
+
 ## 🚀 Technologies
 
 - **React 18.3** - Bibliothèque UI
@@ -87,6 +93,12 @@ CodeFolio/
   - Section Expériences professionnelles
   - Liens sociaux et contact
   
+- ✅ **Command Console (NEW!)**
+  - Accès admin via commandes (Ctrl+K)
+  - Interface terminal-like
+  - Pas de boutons admin visibles
+  - Navigation par clavier
+  
 - ✅ **Authentification JWT**
   - Login/Logout sécurisé
   - Token management
@@ -128,6 +140,15 @@ Username: admin
 Password: admin123
 ```
 
+### Command Console Access (NEW!)
+1. Press `Ctrl+K` anywhere on the site
+2. Type `login` to access login page
+3. Enter credentials
+4. Press `Ctrl+K` again
+5. Type `dashboard` to access admin panel
+6. Type `logout` to sign out
+7. Type `help` for all commands
+
 ### Flow d'authentification
 1. Utilisateur entre username/password sur `/login`
 2. Backend valide et retourne `accessToken` + `refreshToken`
@@ -135,6 +156,7 @@ Password: admin123
 4. `accessToken` ajouté dans headers pour chaque requête GraphQL
 5. Routes admin protégées par `ProtectedRoute`
 6. Token refresh automatique avant expiration
+7. **Accès admin uniquement via Command Console (pas de boutons visibles)**
 
 ## 📡 API GraphQL
 
@@ -209,6 +231,15 @@ npm run lint
 
 ## 🐛 Debugging
 
+### ⚠️ "No profile data found" Error?
+
+**Quick Fix:**
+1. Make sure backend is running: `cd backend && npm run dev`
+2. Backend should be on port 4000
+3. Create profile via admin panel (Ctrl+K → login → dashboard)
+
+**See:** [TROUBLESHOOTING.md](./TROUBLESHOOTING.md) for complete guide
+
 ### Erreurs communes
 
 **1. CORS Error**
@@ -255,6 +286,25 @@ MIT
 
 ## 📚 Documentation
 
+### 🆕 Command Console (NEW!)
+- [📖 Documentation Index](./DOCUMENTATION_INDEX.md) - **START HERE** - Complete guide to all docs
+- [🚀 Quick Start](./QUICK_START.md) - Get started in 30 seconds
+- [📋 Command Reference](./COMMAND_REFERENCE.md) - Printable cheat sheet
+- [📖 Complete Guide](./COMMAND_CONSOLE_GUIDE.md) - Full implementation guide
+- [🏗️ Architecture](./ARCHITECTURE_DIAGRAM.md) - Visual diagrams
+- [🧪 Testing Guide](./TESTING_GUIDE.md) - Complete test suite
+- [📝 Implementation Summary](./IMPLEMENTATION_SUMMARY.md) - Technical overview
+
+### 📱 Responsive Design (NEW!)
+- [✅ Implementation Complete](./RESPONSIVE_IMPLEMENTATION_COMPLETE.md) - **ALL DONE!** ✅
+- [📱 Responsive Design Guide](./RESPONSIVE_DESIGN_GUIDE.md) - Complete responsive design guide for React
+- [✅ Implementation Checklist](./RESPONSIVE_CHECKLIST.md) - Step-by-step checklist
+- [📝 Quick Summary](./RESPONSIVE_SUMMARY.md) - 15-minute quick start
+- [🧪 Device Testing Guide](./DEVICE_TESTING_GUIDE.md) - Test on real devices
+
+### Project Documentation
+- [Apollo Client Explained](./APOLLO_CLIENT_EXPLAINED.md) - **NEW!** Detailed explanation of client.ts
+- [Apollo Client Visual Guide](./APOLLO_CLIENT_VISUAL.md) - Visual diagrams
 - [Frontend Integration Guide](./FRONTEND_INTEGRATION_GUIDE.md)
 - [Backend Documentation](../backend/README.md)
 - [Apollo Client Docs](https://www.apollographql.com/docs/react/)

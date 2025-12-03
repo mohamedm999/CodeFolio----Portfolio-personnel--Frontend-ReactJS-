@@ -1,42 +1,55 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { ApolloProvider } from '@apollo/client';
-import { client } from './apollo/client';
 import { AuthProvider } from './context/AuthContext';
+import { ToastProvider } from './context/ToastContext';
 import { Home } from './pages/Home';
 import { Login } from './pages/Login';
-import { TestConnection } from './pages/TestConnection';
 import { ProtectedRoute } from './components/ProtectedRoute';
-import './App.css';
+import { AdminLayout } from './components/layout/AdminLayout';
+import { Dashboard } from './pages/admin/Dashboard';
+import { ProfileEdit } from './pages/admin/ProfileEdit';
+import { ProjectsList } from './pages/admin/ProjectsList';
+import { ProjectForm } from './pages/admin/ProjectForm';
+import { SkillsList } from './pages/admin/SkillsList';
+import { SkillForm } from './pages/admin/SkillForm';
+import { ExperiencesList } from './pages/admin/ExperiencesList';
+import { ExperienceForm } from './pages/admin/ExperienceForm';
 
 function App() {
   return (
-    <ApolloProvider client={client}>
+    <ToastProvider>
       <AuthProvider>
         <Router>
           <Routes>
-            <Route path="/test" element={<TestConnection />} />
+            <Route path="/test" element={<div className="text-white p-10">Test Route - Firebase Migration In Progress</div>} />
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route
               path="/admin/*"
               element={
                 <ProtectedRoute>
-                  <div className="flex items-center justify-center min-h-screen">
-                    <div className="text-center">
-                      <h1 className="text-4xl font-bold mb-4">Admin Dashboard</h1>
-                      <p className="text-gray-600">Coming soon...</p>
-                      <p className="text-sm text-gray-500 mt-4">
-                        Admin CRUD interface will be implemented next
-                      </p>
-                    </div>
-                  </div>
+                  <Routes>
+                    <Route element={<AdminLayout />}>
+                      <Route index element={<Dashboard />} />
+                      <Route path="dashboard" element={<Dashboard />} />
+                      <Route path="profile" element={<ProfileEdit />} />
+                      <Route path="projects" element={<ProjectsList />} />
+                      <Route path="projects/new" element={<ProjectForm />} />
+                      <Route path="projects/edit/:id" element={<ProjectForm />} />
+                      <Route path="skills" element={<SkillsList />} />
+                      <Route path="skills/new" element={<SkillForm />} />
+                      <Route path="skills/edit/:id" element={<SkillForm />} />
+                      <Route path="experiences" element={<ExperiencesList />} />
+                      <Route path="experiences/new" element={<ExperienceForm />} />
+                      <Route path="experiences/edit/:id" element={<ExperienceForm />} />
+                    </Route>
+                  </Routes>
                 </ProtectedRoute>
               }
             />
           </Routes>
         </Router>
       </AuthProvider>
-    </ApolloProvider>
+    </ToastProvider>
   );
 }
 

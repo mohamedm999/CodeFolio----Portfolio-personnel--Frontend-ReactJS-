@@ -1,0 +1,360 @@
+================================================================================
+SOLUTION TP2: Structures de sélection (Algorithmique et Programmation C)
+================================================================================
+
+--------------------------------------------------------------------------------
+EXERCICE 1 (EX1_TP2) — Comparer deux réels x et y
+--------------------------------------------------------------------------------
+
+[OBJECTIF]
+Écrire un programme qui lit deux nombres réels x et y, puis affiche :
+- "Egaux" si x est égal à y.
+- "Different" si x est différent de y.
+
+Nous allons résoudre ce problème en utilisant trois approches différentes pour illustrer les variantes de la structure conditionnelle.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+VERSION 1 : Structure alternative simple répétée (If séparés)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[EXPLICATION DÉTAILLÉE]
+Dans cette approche, nous utilisons des instructions conditionnelles `Si` (if) totalement indépendantes les unes des autres.
+Le programme va évaluer la première condition `(x == y)`. Si elle est vraie, il exécute l'instruction associée.
+Ensuite, le programme va OBLIGATOIREMENT évaluer la seconde condition `(x != y)`, même si la première était déjà vraie.
+C'est une structure "répétée" car on répète les tests. Bien que fonctionnelle, cette méthode est moins efficace car elle force l'ordinateur à faire des vérifications parfois inutiles.
+
+[ALGORITHME]
+Algorithme Comparaison_V1
+Variables
+    x, y : Réel
+Début
+    Ecrire("Entrez la valeur de x :")
+    Lire(x)
+    Ecrire("Entrez la valeur de y :")
+    Lire(y)
+
+    Si (x = y) Alors
+        Ecrire("Egaux")
+    FinSi
+
+    Si (x <> y) Alors
+        Ecrire("Different")
+    FinSi
+Fin
+
+[CODE C]
+#include <stdio.h>
+
+int main() {
+    float x, y;
+
+    printf("Entrez la valeur de x : ");
+    scanf("%f", &x);
+    printf("Entrez la valeur de y : ");
+    scanf("%f", &y);
+
+    // Version 1 : If séparés
+    if (x == y) {
+        printf("Egaux\n");
+    }
+    if (x != y) {
+        printf("Different\n");
+    }
+
+    return 0;
+}
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+VERSION 2 : Structure alternative complète (If - Else)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[EXPLICATION DÉTAILLÉE]
+C'est la structure standard pour choisir entre deux options mutuellement exclusives.
+Nous utilisons le couple `Si ... Sinon` (if ... else).
+Le programme évalue la condition `(x == y)`.
+- Si elle est VRAIE : il affiche "Egaux" et saute directement la partie "Sinon".
+- Si elle est FAUSSE : il exécute automatiquement la partie "Sinon" (affiche "Different").
+Cette méthode est plus efficace que la précédente car on ne fait qu'un seul test.
+
+[ALGORITHME]
+Algorithme Comparaison_V2
+Variables
+    x, y : Réel
+Début
+    Ecrire("Entrez la valeur de x :")
+    Lire(x)
+    Ecrire("Entrez la valeur de y :")
+    Lire(y)
+
+    Si (x = y) Alors
+        Ecrire("Egaux")
+    Sinon
+        Ecrire("Different")
+    FinSi
+Fin
+
+[CODE C]
+#include <stdio.h>
+
+int main() {
+    float x, y;
+
+    printf("Entrez la valeur de x : ");
+    scanf("%f", &x);
+    printf("Entrez la valeur de y : ");
+    scanf("%f", &y);
+
+    // Version 2 : If - Else
+    if (x == y) {
+        printf("Egaux\n");
+    } else {
+        printf("Different\n");
+    }
+
+    return 0;
+}
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+VERSION 3 : Combinaison de conditions (Opérateurs logiques)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[EXPLICATION DÉTAILLÉE]
+Ici, l'objectif est de montrer comment manipuler la logique booléenne.
+Au lieu de tester directement l'égalité, nous pouvons tester la négation de l'inégalité.
+L'expression `NON (x != y)` est logiquement équivalente à `(x == y)`.
+En C, l'opérateur `!` signifie NON. Donc `!(x != y)` devient vrai si x est égal à y.
+C'est une façon différente d'exprimer la même logique, souvent utile pour des conditions plus complexes.
+
+[ALGORITHME]
+Algorithme Comparaison_V3
+Variables
+    x, y : Réel
+Début
+    Ecrire("Entrez la valeur de x :")
+    Lire(x)
+    Ecrire("Entrez la valeur de y :")
+    Lire(y)
+
+    Si NON(x <> y) Alors
+        Ecrire("Egaux")
+    Sinon
+        Ecrire("Different")
+    FinSi
+Fin
+
+[CODE C]
+#include <stdio.h>
+
+int main() {
+    float x, y;
+
+    printf("Entrez la valeur de x : ");
+    scanf("%f", &x);
+    printf("Entrez la valeur de y : ");
+    scanf("%f", &y);
+
+    // Version 3 : Opérateurs logiques (Exemple avec négation)
+    if (!(x != y)) {
+        printf("Egaux\n");
+    } else {
+        printf("Different\n");
+    }
+
+    return 0;
+}
+
+
+--------------------------------------------------------------------------------
+EXERCICE 2 (EX2_TP2) — Donner une couleur selon un chiffre N
+--------------------------------------------------------------------------------
+
+[OBJECTIF]
+Le programme demande un entier N et affiche la couleur correspondante selon le tableau :
+1: Noir, 2: Bleu, 3: Vert, 4: Jaune, 5: Rouge, 6: Blanc.
+Si N n'est pas compris entre 1 et 6, afficher "Couleur non prédéfinie".
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+VERSION 1 : Structure alternative simple répétée (If séparés)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[EXPLICATION DÉTAILLÉE]
+Nous écrivons un `Si` pour chaque cas possible (1 à 6).
+Le programme va tester N contre 1, puis contre 2, puis contre 3... jusqu'à 6.
+Pour gérer le cas d'erreur (nombre invalide), nous devons ajouter une condition explicite qui vérifie si N est hors de l'intervalle [1, 6] (c'est-à-dire si N < 1 OU N > 6).
+Cette méthode est laborieuse pour l'ordinateur car même si N vaut 1, il testera quand même si N vaut 2, 3, etc.
+
+[ALGORITHME]
+Algorithme Couleurs_V1
+Variables
+    N : Entier
+Début
+    Ecrire("Entrez un nombre N :")
+    Lire(N)
+
+    Si (N = 1) Alors Ecrire("Noir") FinSi
+    Si (N = 2) Alors Ecrire("Bleu") FinSi
+    Si (N = 3) Alors Ecrire("Vert") FinSi
+    Si (N = 4) Alors Ecrire("Jaune") FinSi
+    Si (N = 5) Alors Ecrire("Rouge") FinSi
+    Si (N = 6) Alors Ecrire("Blanc") FinSi
+    
+    Si (N < 1 OU N > 6) Alors
+        Ecrire("Couleur non prédéfinie")
+    FinSi
+Fin
+
+[CODE C]
+#include <stdio.h>
+
+int main() {
+    int N;
+    printf("Entrez un nombre N : ");
+    scanf("%d", &N);
+
+    // Version 1 : If séparés
+    if (N == 1) printf("Noir\n");
+    if (N == 2) printf("Bleu\n");
+    if (N == 3) printf("Vert\n");
+    if (N == 4) printf("Jaune\n");
+    if (N == 5) printf("Rouge\n");
+    if (N == 6) printf("Blanc\n");
+    
+    if (N < 1 || N > 6) {
+        printf("Couleur non prédéfinie\n");
+    }
+
+    return 0;
+}
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+VERSION 2 : Structure alternative imbriquée (If imbriqués)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[EXPLICATION DÉTAILLÉE]
+Ici, nous plaçons chaque nouveau test DANS le `Sinon` du test précédent.
+Cela crée une structure en cascade (ou en escalier).
+- Si N=1, on affiche "Noir" et on sort de toute la structure (on ne teste pas le reste).
+- Sinon (si N n'est pas 1), on entre dans le `Sinon` et on teste si N=2.
+- Et ainsi de suite.
+Le dernier `Sinon` (celui tout à l'intérieur) correspond au cas où aucune des conditions précédentes n'a été remplie, donc c'est le cas "Couleur non prédéfinie".
+C'est plus optimisé que la Version 1, mais le code devient très indenté et difficile à lire si on a beaucoup de cas.
+
+[ALGORITHME]
+Algorithme Couleurs_V2
+Variables
+    N : Entier
+Début
+    Ecrire("Entrez un nombre N :")
+    Lire(N)
+
+    Si (N = 1) Alors
+        Ecrire("Noir")
+    Sinon
+        Si (N = 2) Alors
+            Ecrire("Bleu")
+        Sinon
+            Si (N = 3) Alors
+                Ecrire("Vert")
+            Sinon
+                Si (N = 4) Alors
+                    Ecrire("Jaune")
+                Sinon
+                    Si (N = 5) Alors
+                        Ecrire("Rouge")
+                    Sinon
+                        Si (N = 6) Alors
+                            Ecrire("Blanc")
+                        Sinon
+                            Ecrire("Couleur non prédéfinie")
+                        FinSi
+                    FinSi
+                FinSi
+            FinSi
+        FinSi
+    FinSi
+Fin
+
+[CODE C]
+#include <stdio.h>
+
+int main() {
+    int N;
+    printf("Entrez un nombre N : ");
+    scanf("%d", &N);
+
+    // Version 2 : If imbriqués
+    if (N == 1) {
+        printf("Noir\n");
+    } else {
+        if (N == 2) {
+            printf("Bleu\n");
+        } else {
+            if (N == 3) {
+                printf("Vert\n");
+            } else {
+                if (N == 4) {
+                    printf("Jaune\n");
+                } else {
+                    if (N == 5) {
+                        printf("Rouge\n");
+                    } else {
+                        if (N == 6) {
+                            printf("Blanc\n");
+                        } else {
+                            printf("Couleur non prédéfinie\n");
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    return 0;
+}
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+VERSION 3 : Structure alternative de cas (Switch Case)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[EXPLICATION DÉTAILLÉE]
+C'est la méthode idéale pour ce genre d'exercice (choix multiple basé sur la valeur d'une seule variable).
+L'instruction `Selon` (switch) prend la variable N et saute directement au `Cas` (case) correspondant.
+- `case 1:` correspond à N=1.
+- `break;` est très important : il dit au programme de sortir du switch une fois l'instruction exécutée. Sans `break`, le programme continuerait à exécuter les cas suivants.
+- `default:` est le cas par défaut qui s'exécute si N ne correspond à aucun des `case` définis (équivalent au dernier `Sinon`).
+C'est la version la plus lisible, la plus propre et souvent la plus rapide.
+
+[ALGORITHME]
+Algorithme Couleurs_V3
+Variables
+    N : Entier
+Début
+    Ecrire("Entrez un nombre N :")
+    Lire(N)
+
+    Selon Que N Vaut
+        1 : Ecrire("Noir")
+        2 : Ecrire("Bleu")
+        3 : Ecrire("Vert")
+        4 : Ecrire("Jaune")
+        5 : Ecrire("Rouge")
+        6 : Ecrire("Blanc")
+        Sinon : Ecrire("Couleur non prédéfinie")
+    FinSelon
+Fin
+
+[CODE C]
+#include <stdio.h>
+
+int main() {
+    int N;
+    printf("Entrez un nombre N : ");
+    scanf("%d", &N);
+
+    // Version 3 : Switch Case
+    switch (N) {
+        case 1: printf("Noir\n"); break;
+        case 2: printf("Bleu\n"); break;
+        case 3: printf("Vert\n"); break;
+        case 4: printf("Jaune\n"); break;
+        case 5: printf("Rouge\n"); break;
+        case 6: printf("Blanc\n"); break;
+        default: printf("Couleur non prédéfinie\n"); break;
+    }
+
+    return 0;
+}

@@ -1,13 +1,12 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-import { useMutation } from '@apollo/client';
-import { LOGIN_MUTATION, LOGOUT_MUTATION, REFRESH_TOKEN_MUTATION } from '../graphql/auth';
-import { isAuthenticated, clearAuthData, storeAuthTokens, isTokenExpired } from '../utils/auth';
+import { User } from 'firebase/auth';
+import { loginUser, logoutUser, subscribeToAuthChanges } from '../services/firebase/auth.service';
 
 interface AuthContextType {
   isAuth: boolean;
-  login: (username: string, password: string) => Promise<void>;
+  user: User | null;
+  login: (email: string, password: string) => Promise<void>;
   logout: () => Promise<void>;
-  refreshToken: () => Promise<boolean>;
   loading: boolean;
   error: string | null;
 }
@@ -15,39 +14,44 @@ interface AuthContextType {
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const [isAuth, setIsAuth] = useState<boolean>(isAuthenticated());
-  const [loading, setLoading] = useState<boolean>(false);
+  const [isAuth, setIsAuth] = useState<boolean>(false);
+  const [user, setUser] = useState<User | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-
-  const [loginMutation] = useMutation(LOGIN_MUTATION);
-  const [logoutMutation] = useMutation(LOGOUT_MUTATION);
-  const [refreshTokenMutation] = useMutation(REFRESH_TOKEN_MUTATION);
 
   // Check authentication status on mount
   useEffect(() => {
-    const checkAuth = () => {
-      const authenticated = isAuthenticated();
-      setIsAuth(authenticated);
-    };
-    checkAuth();
+    const unsubscribe = subscribeToAuthChanges((currentUser) => {
+      setUser(currentUser);
+      setIsAuth(!!currentUser);
+      setLoading(false);
+    });
+
+    return () => unsubscribe();
   }, []);
 
-  const login = async (username: string, password: string) => {
+  const login = async (email: string, password: string) => {
     try {
       setLoading(true);
       setError(null);
-      
-      const { data } = await loginMutation({
-        variables: { username, password },
-      });
-
-      if (data?.login) {
-        storeAuthTokens(data.login.accessToken, data.login.refreshToken);
-        setIsAuth(true);
-      }
+      await loginUser(email, password);
+      // State updates handled by onAuthStateChanged
     } catch (err: any) {
-      setError(err.message || 'Login failed');
-      throw err;
+      console.error('Login failed:', err);
+      let errorMessage = 'Login failed';
+
+      if (err.code === 'auth/invalid-credential') {
+        errorMessage = 'Invalid email or password';
+      } else if (err.code === 'auth/user-not-found') {
+        errorMessage = 'User not found';
+      } else if (err.code === 'auth/wrong-password') {
+        errorMessage = 'Invalid password';
+      } else if (err.code === 'auth/too-many-requests') {
+        errorMessage = 'Too many failed attempts. Please try again later.';
+      }
+
+      setError(errorMessage);
+      throw new Error(errorMessage);
     } finally {
       setLoading(false);
     }
@@ -56,48 +60,18 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const logout = async () => {
     try {
       setLoading(true);
-      await logoutMutation();
-      clearAuthData();
-      setIsAuth(false);
+      await logoutUser();
+      // State updates handled by onAuthStateChanged
     } catch (err: any) {
       console.error('Logout error:', err);
-      // Clear auth data even if logout fails
-      clearAuthData();
-      setIsAuth(false);
+      setError(err.message);
     } finally {
       setLoading(false);
     }
   };
 
-  const refreshToken = async (): Promise<boolean> => {
-    const token = localStorage.getItem('refreshToken');
-    if (!token || isTokenExpired(token)) {
-      clearAuthData();
-      setIsAuth(false);
-      return false;
-    }
-
-    try {
-      const { data } = await refreshTokenMutation({
-        variables: { refreshToken: token },
-      });
-
-      if (data?.refreshToken) {
-        storeAuthTokens(data.refreshToken.accessToken, data.refreshToken.refreshToken);
-        setIsAuth(true);
-        return true;
-      }
-      return false;
-    } catch (err) {
-      console.error('Token refresh failed:', err);
-      clearAuthData();
-      setIsAuth(false);
-      return false;
-    }
-  };
-
   return (
-    <AuthContext.Provider value={{ isAuth, login, logout, refreshToken, loading, error }}>
+    <AuthContext.Provider value={{ isAuth, user, login, logout, loading, error }}>
       {children}
     </AuthContext.Provider>
   );
