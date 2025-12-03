@@ -121,7 +121,7 @@ export const Home: React.FC = () => {
             <div className="relative w-full max-w-[750px] lg:-mb-20">
               <div className="absolute inset-0 bg-gradient-to-tr from-purple-600 to-pink-600 rounded-full blur-[80px] opacity-40 animate-pulse"></div>
               <img
-                src={profile?.avatar || "/me.png"}
+                src={"/me.png"}
                 alt={profile?.name || "Developer"}
                 className="relative w-full h-auto object-contain z-10 drop-shadow-2xl"
               />
@@ -181,7 +181,7 @@ export const Home: React.FC = () => {
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <div className="glass-card p-4 rounded-xl text-center hover:bg-purple-500/10 transition-colors">
                   <Briefcase className="w-8 h-8 text-purple-500 mx-auto mb-2" />
-                  <h3 className="text-2xl font-bold text-white">1+</h3>
+                  <h3 className="text-2xl font-bold text-white">4+</h3>
                   <p className="text-gray-400 text-sm">Years Experience</p>
                 </div>
                 <div className="glass-card p-4 rounded-xl text-center hover:bg-purple-500/10 transition-colors">
@@ -274,6 +274,32 @@ export const Home: React.FC = () => {
                       alt={project.title}
                       className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
                     />
+                    
+                    {/* Hover Icons - Top Right */}
+                    <div className="absolute top-3 right-3 z-20 flex gap-2 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-[-10px] group-hover:translate-y-0">
+                      {project.demoUrl && (
+                        <a
+                          href={project.demoUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="w-10 h-10 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-white hover:bg-purple-500 hover:border-purple-500 transition-all duration-300 hover:scale-110"
+                          title="View Live Site"
+                        >
+                          <ExternalLink size={18} />
+                        </a>
+                      )}
+                      {project.githubUrl && (
+                        <a
+                          href={project.githubUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="w-10 h-10 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-white hover:bg-gray-800 hover:border-gray-700 transition-all duration-300 hover:scale-110"
+                          title="View GitHub Repo"
+                        >
+                          <Github size={18} />
+                        </a>
+                      )}
+                    </div>
                   </div>
                 )}
 
@@ -290,9 +316,14 @@ export const Home: React.FC = () => {
                   </div>
 
                   <div className="flex items-center gap-4">
+                    {project.demoUrl && (
+                      <a href={project.demoUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-sm text-white hover:text-purple-400 transition-colors">
+                        Live Demo <ExternalLink size={14} />
+                      </a>
+                    )}
                     {project.githubUrl && (
-                      <a href={project.githubUrl} className="flex items-center gap-2 text-sm text-white hover:text-purple-400 transition-colors">
-                        View Project <ExternalLink size={14} />
+                      <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-sm text-gray-400 hover:text-white transition-colors">
+                        <Github size={14} /> Code
                       </a>
                     )}
                   </div>
