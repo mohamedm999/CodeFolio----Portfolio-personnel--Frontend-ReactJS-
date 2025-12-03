@@ -1,6 +1,7 @@
 import { Outlet, Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { useState } from 'react';
+import { CommandConsole } from '../CommandConsole';
 
 export const AdminLayout = () => {
   const { logout } = useAuth();
@@ -207,6 +208,8 @@ export const AdminLayout = () => {
           </div>
         </main>
       </div>
+
+      <CommandConsole />
     </div>
   );
 };

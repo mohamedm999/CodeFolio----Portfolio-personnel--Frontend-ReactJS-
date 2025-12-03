@@ -3,6 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { motion } from 'framer-motion';
 import { Lock, Mail, ArrowLeft, Sparkles } from 'lucide-react';
+import { CommandConsole } from '../components/CommandConsole';
 
 export const Login = () => {
   const [email, setEmail] = useState('');
@@ -172,6 +173,8 @@ export const Login = () => {
         <div className="absolute -top-4 -right-4 w-24 h-24 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full blur-2xl opacity-20" />
         <div className="absolute -bottom-4 -left-4 w-32 h-32 bg-gradient-to-br from-cyan-500 to-purple-500 rounded-full blur-2xl opacity-20" />
       </motion.div>
+
+      <CommandConsole />
     </div>
   );
 };

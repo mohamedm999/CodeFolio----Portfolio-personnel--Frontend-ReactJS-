@@ -10,6 +10,7 @@ import { Navbar } from '../components/layout/Navbar';
 import { Footer } from '../components/layout/Footer';
 import { ChatWidget } from '../components/ui/ChatWidget';
 import { Loader } from '../components/ui/Loader';
+import { CommandConsole } from '../components/CommandConsole';
 
 export const Home: React.FC = () => {
   const [isInitialLoading, setIsInitialLoading] = useState(true);
@@ -470,6 +471,7 @@ export const Home: React.FC = () => {
 
       <Footer />
       <ChatWidget />
+      <CommandConsole />
     </div>
   );
 };
