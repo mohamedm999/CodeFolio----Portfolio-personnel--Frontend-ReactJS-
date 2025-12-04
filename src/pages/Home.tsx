@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { Download, Eye, Rocket, Mail, Phone, MapPin, Send, Github, Linkedin, Instagram, ExternalLink, Briefcase, Code, Award } from 'lucide-react';
+import { Download, Eye, Rocket, Mail, Phone, MapPin, Send, Github, Linkedin, Instagram, ExternalLink, Briefcase, Code, Award, Calendar, Building2 } from 'lucide-react';
 import { useFirestore } from '../hooks/useFirestore';
 import { getProfile } from '../services/firebase/profile.service';
 import { Profile, Project, Skill, Experience } from '../types/firebase.types';
@@ -87,7 +87,7 @@ export const Home: React.FC = () => {
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight">
               Hi, I'm <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 via-pink-500 to-purple-500 animate-gradient-x">
-                {profile?.name || "CodeZenith"}
+                {profile?.name || "M2Dev"}
               </span>
             </h1>
             <h2 className="text-2xl md:text-3xl text-gray-300 mb-8 font-light">
@@ -244,8 +244,93 @@ export const Home: React.FC = () => {
         </div>
       </section>
 
+      {/* Experience Section */}
+      <section id="experience" className="py-20 relative bg-black/40">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">Work <span className="text-purple-500">Experience</span></h2>
+            <p className="text-gray-400">My professional journey</p>
+          </motion.div>
+
+          <div className="relative">
+            {/* Timeline line */}
+            <div className="absolute left-0 md:left-1/2 transform md:-translate-x-px h-full w-0.5 bg-gradient-to-b from-purple-500 to-pink-500"></div>
+
+            <div className="space-y-12">
+              {experiences.map((exp, index) => (
+                <motion.div
+                  key={exp.id}
+                  initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                  className={`relative flex flex-col md:flex-row gap-8 ${index % 2 === 0 ? 'md:flex-row-reverse' : ''}`}
+                >
+                  {/* Timeline dot */}
+                  <div className="absolute left-0 md:left-1/2 transform -translate-x-1/2 w-4 h-4 bg-purple-500 rounded-full border-4 border-[#030014] z-10"></div>
+
+                  {/* Content */}
+                  <div className={`ml-8 md:ml-0 md:w-1/2 ${index % 2 === 0 ? 'md:pr-12' : 'md:pl-12'}`}>
+                    <div className="glass-card p-6 rounded-2xl border border-gray-800 hover:border-purple-500/50 transition-all group hover:-translate-y-1">
+                      <div className="flex items-start justify-between mb-4">
+                        <div>
+                          <h3 className="text-xl font-bold text-white group-hover:text-purple-400 transition-colors">{exp.position}</h3>
+                          <div className="flex items-center gap-2 text-purple-400 mt-1">
+                            <Building2 size={16} />
+                            <span>{exp.company}</span>
+                          </div>
+                        </div>
+                        {exp.current && (
+                          <span className="px-3 py-1 text-xs rounded-full bg-green-500/20 text-green-400 border border-green-500/30">
+                            Current
+                          </span>
+                        )}
+                      </div>
+
+                      <div className="flex items-center gap-2 text-gray-500 text-sm mb-4">
+                        <Calendar size={14} />
+                        <span>{exp.startDate} - {exp.current ? 'Present' : exp.endDate}</span>
+                        {exp.location && (
+                          <>
+                            <span className="mx-2">•</span>
+                            <MapPin size={14} />
+                            <span>{exp.location}</span>
+                          </>
+                        )}
+                      </div>
+
+                      {exp.description && (
+                        <p className="text-gray-400 text-sm mb-4">{exp.description}</p>
+                      )}
+
+                      {exp.technologies && exp.technologies.length > 0 && (
+                        <div className="flex flex-wrap gap-2">
+                          {exp.technologies.map(tech => (
+                            <span key={tech} className="px-2 py-1 text-xs rounded-full bg-purple-500/10 text-purple-300 border border-purple-500/20">
+                              {tech}
+                            </span>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Empty space for alternating layout */}
+                  <div className="hidden md:block md:w-1/2"></div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Projects Section */}
-      <section id="projects" className="py-20 relative bg-black/40">
+      <section id="projects" className="py-20 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}

@@ -8,7 +8,7 @@ export const Footer: React.FC = () => {
 
                     <div className="text-center md:text-left">
                         <span className="text-2xl font-bold text-white tracking-wide">
-                            Code<span className="text-purple-500">Zenith</span>
+                            M2<span className="text-purple-500">Dev</span>
                         </span>
                         <p className="text-gray-500 mt-2 text-sm max-w-xs">
                             Building modern, high-performance web experiences through elegant design, clean code, and the latest technologies.
@@ -27,7 +27,7 @@ export const Footer: React.FC = () => {
                 </div>
 
                 <div className="mt-12 pt-8 border-t border-gray-900 text-center text-gray-600 text-xs">
-                    <p>© 2025 CodeZenith. All rights reserved.</p>
+                    <p>© 2025 M2Dev. All rights reserved.</p>
                 </div>
             </div>
         </footer>

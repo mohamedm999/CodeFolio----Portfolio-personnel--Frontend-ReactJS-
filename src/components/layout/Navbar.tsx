@@ -22,6 +22,7 @@ export const Navbar: React.FC<NavbarProps> = ({ profileName }) => {
         { name: 'Home', href: '#home' },
         { name: 'About', href: '#about' },
         { name: 'Skills', href: '#skills' },
+        { name: 'Experience', href: '#experience' },
         { name: 'Projects', href: '#projects' },
         { name: 'Contact', href: '#contact' },
     ];
@@ -35,14 +36,12 @@ export const Navbar: React.FC<NavbarProps> = ({ profileName }) => {
                 <div className="flex items-center justify-between h-20">
                     {/* Logo */}
                     <div className="flex-shrink-0 cursor-pointer">
-                        <a href="#home" className="text-2xl font-bold text-white tracking-wide">
-                            {profileName ? (
-                                <>
-                                    {profileName.split(' ')[0]}<span className="text-purple-500">{profileName.split(' ')[1] || ''}</span>
-                                </>
-                            ) : (
-                                <>Code<span className="text-purple-500">Zenith</span></>
-                            )}
+                        <a href="#home" className="flex items-center">
+                            <img 
+                                src="/logo-Photoroom.png" 
+                                alt={profileName || "Logo"} 
+                                className="h-12 sm:h-14 md:h-16 lg:h-18 w-auto object-contain max-w-[180px] sm:max-w-[220px] md:max-w-[260px]"
+                            />
                         </a>
                     </div>
 

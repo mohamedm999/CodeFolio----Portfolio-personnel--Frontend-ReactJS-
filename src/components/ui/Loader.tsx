@@ -36,7 +36,7 @@ export const Loader: React.FC<LoaderProps> = ({ onLoadingComplete }) => {
                 className="relative z-10 text-center"
             >
                 <h1 className="text-4xl md:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600 mb-4">
-                    CodeZenith
+                    M2Dev
                 </h1>
                 <p className="text-gray-400 text-sm mb-8 tracking-wider">Loading Portfolio...</p>
 

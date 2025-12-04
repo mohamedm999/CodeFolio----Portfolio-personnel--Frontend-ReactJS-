@@ -10,7 +10,7 @@ interface Message {
 export const ChatWidget: React.FC = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [messages, setMessages] = useState<Message[]>([
-        { role: 'assistant', content: "Hi! I'm the AI assistant for CodeZenith. How can I help you today?" }
+        { role: 'assistant', content: "Hi! I'm the AI assistant for M2Dev. How can I help you today?" }
     ]);
     const [inputValue, setInputValue] = useState('');
     const [isLoading, setIsLoading] = useState(false);
@@ -37,7 +37,7 @@ export const ChatWidget: React.FC = () => {
             const responses = [
                 "That's interesting! Tell me more.",
                 "I can definitely help with that.",
-                "CodeZenith is built with React and Tailwind CSS.",
+                "This portfolio is built with React and Tailwind CSS.",
                 "Feel free to check out the projects section!",
                 "You can contact me via the form above."
             ];
