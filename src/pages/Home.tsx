@@ -12,6 +12,7 @@ import { ChatWidget } from '../components/ui/ChatWidget';
 import { Loader } from '../components/ui/Loader';
 import { CommandConsole } from '../components/CommandConsole';
 import { OptimizedImage } from '../components/ui/OptimizedImage';
+import { HireMeModal } from '../components/HireMeModal';
 
 export const Home: React.FC = () => {
   const [isInitialLoading, setIsInitialLoading] = useState(true);
@@ -23,6 +24,7 @@ export const Home: React.FC = () => {
   const [profileLoading, setProfileLoading] = useState(true);
   const [profileError, setProfileError] = useState<Error | null>(null);
   const [formState, setFormState] = useState({ name: '', email: '', message: '' });
+  const [isHireMeModalOpen, setIsHireMeModalOpen] = useState(false);
 
   useEffect(() => {
     const fetchProfile = async () => {
@@ -99,10 +101,13 @@ export const Home: React.FC = () => {
             </p>
 
             <div className="flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start">
-              <a href="#contact" className="px-8 py-3 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold shadow-lg shadow-purple-500/25 hover:shadow-purple-500/50 transition-all transform hover:-translate-y-1 flex items-center gap-2">
+              <button 
+                onClick={() => setIsHireMeModalOpen(true)}
+                className="px-8 py-3 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold shadow-lg shadow-purple-500/25 hover:shadow-purple-500/50 transition-all transform hover:-translate-y-1 flex items-center gap-2"
+              >
                 <Rocket size={20} />
                 Hire Me
-              </a>
+              </button>
               
               {/* CV Download Dropdown */}
               <div className="relative group">
@@ -582,6 +587,18 @@ export const Home: React.FC = () => {
       <Footer />
       <ChatWidget />
       <CommandConsole />
+      
+      {/* Hire Me Modal */}
+      <HireMeModal 
+        isOpen={isHireMeModalOpen} 
+        onClose={() => setIsHireMeModalOpen(false)}
+        profile={profile ? {
+          name: profile.name,
+          email: profile.email,
+          phone: profile.phone,
+          title: profile.title,
+        } : undefined}
+      />
     </div>
   );
 };
