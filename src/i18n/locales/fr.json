@@ -1,0 +1,133 @@
+{
+  "nav": {
+    "home": "Accueil",
+    "about": "À propos",
+    "skills": "Compétences",
+    "experience": "Expérience",
+    "projects": "Projets",
+    "contact": "Contact"
+  },
+  "hero": {
+    "available": "Disponible en Freelance",
+    "greeting": "Salut, je suis",
+    "defaultName": "M2Dev",
+    "defaultTitle": "Développeur Full Stack",
+    "defaultBio": "Création d'applications web modernes et responsives avec une interface utilisateur soignée, une architecture backend robuste et des expériences utilisateur fluides.",
+    "hireMe": "Me Recruter",
+    "downloadCV": "Télécharger CV",
+    "viewWork": "Voir Mes Projets"
+  },
+  "about": {
+    "title": "À",
+    "titleHighlight": "Propos",
+    "defaultBio1": "Je suis un Développeur Full-Stack avec une expérience pratique dans la création d'applications web rapides, évolutives et responsives utilisant React.js, Node.js, Express, MongoDB et PostgreSQL/MySQL.",
+    "defaultBio2": "Mes compétences couvrent le développement frontend et backend, avec un accent particulier sur le code propre, les expériences utilisateur fluides et les animations UI utilisant des bibliothèques comme Framer Motion.",
+    "yearsExperience": "Années d'Expérience",
+    "projectsCompleted": "Projets Réalisés",
+    "clientSatisfaction": "Satisfaction Client"
+  },
+  "skills": {
+    "title": "Mes",
+    "titleHighlight": "Compétences",
+    "subtitle": "Stack technologique avec laquelle je travaille"
+  },
+  "experience": {
+    "title": "Expérience",
+    "titleHighlight": "Professionnelle",
+    "subtitle": "Mon parcours professionnel",
+    "current": "En cours",
+    "present": "Présent"
+  },
+  "projects": {
+    "title": "Projets",
+    "titleHighlight": "Vedettes",
+    "subtitle": "Une collection de mes meilleurs travaux",
+    "liveDemo": "Démo Live",
+    "code": "Code"
+  },
+  "contact": {
+    "title": "Me",
+    "titleHighlight": "Contacter",
+    "subtitle": "Vous avez un projet en tête ou souhaitez simplement dire bonjour ? Envoyez-moi un message et créons quelque chose d'incroyable ensemble.",
+    "form": {
+      "name": "Nom",
+      "namePlaceholder": "Votre Nom",
+      "email": "Email",
+      "emailPlaceholder": "votre.email@example.com",
+      "message": "Message",
+      "messagePlaceholder": "Parlez-moi de votre projet...",
+      "send": "Envoyer le Message",
+      "sending": "Envoi en cours...",
+      "success": "Message Envoyé !",
+      "error": "Erreur - Réessayer",
+      "thankYou": "Merci ! Je vous répondrai bientôt."
+    },
+    "info": {
+      "title": "Connectons-nous",
+      "description": "Je suis toujours enthousiaste à l'idée de travailler sur de nouveaux projets et de collaborer avec des personnes talentueuses. Que vous ayez un projet spécifique en tête ou que vous souhaitiez simplement explorer les possibilités, j'aimerais vous entendre.",
+      "emailLabel": "Email",
+      "phoneLabel": "Téléphone",
+      "locationLabel": "Localisation",
+      "followMe": "Me Suivre"
+    }
+  },
+  "footer": {
+    "tagline": "Création d'expériences web modernes et performantes grâce à un design élégant, un code propre et les dernières technologies.",
+    "quickLinks": "Liens Rapides",
+    "copyright": "© 2025 M2Dev. Tous droits réservés."
+  },
+  "hireModal": {
+    "title": "Travaillons",
+    "titleHighlight": "Ensemble",
+    "subtitle": "Choisissez comment vous souhaitez me contacter",
+    "sendMessage": "Envoyer un Message",
+    "projectInquiry": "Demande de projet",
+    "whatsapp": "WhatsApp",
+    "quickChat": "Discussion rapide",
+    "scheduleCall": "Planifier un Appel",
+    "bookMeeting": "Réserver une réunion",
+    "saveContact": "Sauvegarder Contact",
+    "downloadVCard": "Télécharger vCard",
+    "reachDirectly": "Ou contactez-moi directement",
+    "form": {
+      "projectType": "Quel type de projet ?",
+      "budget": "Quel est votre budget ?",
+      "timeline": "Délai du projet ?",
+      "yourDetails": "Vos informations",
+      "back": "Retour",
+      "skip": "Passer"
+    },
+    "projectTypes": {
+      "website": "Site Web",
+      "webapp": "Application Web",
+      "ecommerce": "E-Commerce",
+      "api": "API / Backend",
+      "other": "Autre"
+    },
+    "budgetRanges": {
+      "small": "< 5 000 MAD",
+      "medium": "5 000 - 15 000 MAD",
+      "large": "15 000 - 30 000 MAD",
+      "enterprise": "30 000+ MAD",
+      "discuss": "À Discuter"
+    },
+    "timelines": {
+      "urgent": "Dès que possible",
+      "short": "1-2 Semaines",
+      "medium": "1 Mois",
+      "flexible": "Flexible"
+    },
+    "success": {
+      "title": "Message Envoyé !",
+      "message": "Merci de m'avoir contacté. Je vous répondrai dans les 24 heures.",
+      "close": "Fermer"
+    }
+  },
+  "loader": {
+    "loading": "Chargement du Portfolio..."
+  },
+  "common": {
+    "french": "Français",
+    "english": "English"
+  }
+}

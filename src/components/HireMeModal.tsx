@@ -5,6 +5,7 @@ import {
   Send, ArrowRight, ArrowLeft, CheckCircle, Briefcase, 
   Clock, DollarSign, Phone, Linkedin, Github
 } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import emailjs from '@emailjs/browser';
 
 interface HireMeModalProps {
@@ -39,6 +40,7 @@ const EMAILJS_PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || '';
 type ModalView = 'main' | 'email' | 'form' | 'success';
 
 export const HireMeModal: React.FC<HireMeModalProps> = ({ isOpen, onClose, profile }) => {
+  const { t } = useTranslation();
   const [view, setView] = useState<ModalView>('main');
   const [formStep, setFormStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -154,28 +156,28 @@ END:VCARD`;
 
   // Project types
   const projectTypes = [
-    { id: 'website', label: 'Website', icon: '🌐' },
-    { id: 'webapp', label: 'Web Application', icon: '💻' },
-    { id: 'ecommerce', label: 'E-Commerce', icon: '🛒' },
-    { id: 'api', label: 'API / Backend', icon: '⚙️' },
-    { id: 'other', label: 'Other', icon: '📦' },
+    { id: 'website', label: t('hireModal.projectTypes.website'), icon: '🌐' },
+    { id: 'webapp', label: t('hireModal.projectTypes.webapp'), icon: '💻' },
+    { id: 'ecommerce', label: t('hireModal.projectTypes.ecommerce'), icon: '🛒' },
+    { id: 'api', label: t('hireModal.projectTypes.api'), icon: '⚙️' },
+    { id: 'other', label: t('hireModal.projectTypes.other'), icon: '📦' },
   ];
 
   // Budget ranges
   const budgetRanges = [
-    { id: 'small', label: '< 5,000 MAD', icon: '💰' },
-    { id: 'medium', label: '5,000 - 15,000 MAD', icon: '💰💰' },
-    { id: 'large', label: '15,000 - 30,000 MAD', icon: '💰💰💰' },
-    { id: 'enterprise', label: '30,000+ MAD', icon: '🏆' },
-    { id: 'discuss', label: 'Let\'s Discuss', icon: '💬' },
+    { id: 'small', label: t('hireModal.budgetRanges.small'), icon: '💰' },
+    { id: 'medium', label: t('hireModal.budgetRanges.medium'), icon: '💰💰' },
+    { id: 'large', label: t('hireModal.budgetRanges.large'), icon: '💰💰💰' },
+    { id: 'enterprise', label: t('hireModal.budgetRanges.enterprise'), icon: '🏆' },
+    { id: 'discuss', label: t('hireModal.budgetRanges.discuss'), icon: '💬' },
   ];
 
   // Timeline options
   const timelineOptions = [
-    { id: 'urgent', label: 'ASAP', icon: '🚀' },
-    { id: 'short', label: '1-2 Weeks', icon: '📅' },
-    { id: 'medium', label: '1 Month', icon: '📆' },
-    { id: 'flexible', label: 'Flexible', icon: '🕐' },
+    { id: 'urgent', label: t('hireModal.timelines.urgent'), icon: '🚀' },
+    { id: 'short', label: t('hireModal.timelines.short'), icon: '📅' },
+    { id: 'medium', label: t('hireModal.timelines.medium'), icon: '📆' },
+    { id: 'flexible', label: t('hireModal.timelines.flexible'), icon: '🕐' },
   ];
 
   const backdropVariants = {
@@ -243,10 +245,10 @@ END:VCARD`;
                   >
                     <div className="text-center">
                       <h2 className="text-2xl md:text-3xl font-bold text-white mb-2">
-                        Let's Work <span className="text-purple-500">Together</span>
+                        {t('hireModal.title')} <span className="text-purple-500">{t('hireModal.titleHighlight')}</span>
                       </h2>
                       <p className="text-gray-400 text-sm">
-                        Choose how you'd like to connect
+                        {t('hireModal.subtitle')}
                       </p>
                     </div>
 
@@ -259,8 +261,8 @@ END:VCARD`;
                         <div className="w-12 h-12 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center text-white group-hover:scale-110 transition-transform">
                           <Mail size={24} />
                         </div>
-                        <span className="text-white font-medium">Send Message</span>
-                        <span className="text-gray-500 text-xs">Project inquiry</span>
+                        <span className="text-white font-medium">{t('hireModal.sendMessage')}</span>
+                        <span className="text-gray-500 text-xs">{t('hireModal.projectInquiry')}</span>
                       </button>
 
                       <button
@@ -270,8 +272,8 @@ END:VCARD`;
                         <div className="w-12 h-12 rounded-full bg-gradient-to-br from-green-500 to-emerald-500 flex items-center justify-center text-white group-hover:scale-110 transition-transform">
                           <MessageCircle size={24} />
                         </div>
-                        <span className="text-white font-medium">WhatsApp</span>
-                        <span className="text-gray-500 text-xs">Quick chat</span>
+                        <span className="text-white font-medium">{t('hireModal.whatsapp')}</span>
+                        <span className="text-gray-500 text-xs">{t('hireModal.quickChat')}</span>
                       </button>
 
                       <button
@@ -281,8 +283,8 @@ END:VCARD`;
                         <div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center text-white group-hover:scale-110 transition-transform">
                           <Calendar size={24} />
                         </div>
-                        <span className="text-white font-medium">Schedule Call</span>
-                        <span className="text-gray-500 text-xs">Book a meeting</span>
+                        <span className="text-white font-medium">{t('hireModal.scheduleCall')}</span>
+                        <span className="text-gray-500 text-xs">{t('hireModal.bookMeeting')}</span>
                       </button>
 
                       <button
@@ -292,14 +294,14 @@ END:VCARD`;
                         <div className="w-12 h-12 rounded-full bg-gradient-to-br from-orange-500 to-amber-500 flex items-center justify-center text-white group-hover:scale-110 transition-transform">
                           <UserPlus size={24} />
                         </div>
-                        <span className="text-white font-medium">Save Contact</span>
-                        <span className="text-gray-500 text-xs">Download vCard</span>
+                        <span className="text-white font-medium">{t('hireModal.saveContact')}</span>
+                        <span className="text-gray-500 text-xs">{t('hireModal.downloadVCard')}</span>
                       </button>
                     </div>
 
                     {/* Direct Contact Info */}
                     <div className="pt-4 border-t border-gray-800">
-                      <p className="text-gray-500 text-xs text-center mb-3">Or reach me directly</p>
+                      <p className="text-gray-500 text-xs text-center mb-3">{t('hireModal.reachDirectly')}</p>
                       <div className="flex items-center justify-center gap-4">
                         <a
                           href={`mailto:${contactInfo.email}`}
@@ -367,7 +369,7 @@ END:VCARD`;
                         <div className="space-y-4">
                           <div className="text-center mb-6">
                             <Briefcase className="w-10 h-10 text-purple-500 mx-auto mb-2" />
-                            <h3 className="text-xl font-bold text-white">What type of project?</h3>
+                            <h3 className="text-xl font-bold text-white">{t('hireModal.form.projectType')}</h3>
                           </div>
                           <div className="grid grid-cols-2 gap-3">
                             {projectTypes.map((type) => (
@@ -397,7 +399,7 @@ END:VCARD`;
                         <div className="space-y-4">
                           <div className="text-center mb-6">
                             <DollarSign className="w-10 h-10 text-purple-500 mx-auto mb-2" />
-                            <h3 className="text-xl font-bold text-white">What's your budget?</h3>
+                            <h3 className="text-xl font-bold text-white">{t('hireModal.form.budget')}</h3>
                           </div>
                           <div className="space-y-2">
                             {budgetRanges.map((budget) => (
@@ -427,7 +429,7 @@ END:VCARD`;
                         <div className="space-y-4">
                           <div className="text-center mb-6">
                             <Clock className="w-10 h-10 text-purple-500 mx-auto mb-2" />
-                            <h3 className="text-xl font-bold text-white">Project timeline?</h3>
+                            <h3 className="text-xl font-bold text-white">{t('hireModal.form.timeline')}</h3>
                           </div>
                           <div className="grid grid-cols-2 gap-3">
                             {timelineOptions.map((timeline) => (
@@ -457,7 +459,7 @@ END:VCARD`;
                         <div className="space-y-4">
                           <div className="text-center mb-6">
                             <Mail className="w-10 h-10 text-purple-500 mx-auto mb-2" />
-                            <h3 className="text-xl font-bold text-white">Your details</h3>
+                            <h3 className="text-xl font-bold text-white">{t('hireModal.form.yourDetails')}</h3>
                           </div>
                           <div className="space-y-3">
                             <input
@@ -493,11 +495,11 @@ END:VCARD`;
                             {isSubmitting ? (
                               <>
                                 <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                                Sending...
+                                {t('contact.form.sending')}
                               </>
                             ) : (
                               <>
-                                Send Message <Send size={18} />
+                                {t('hireModal.sendMessage')} <Send size={18} />
                               </>
                             )}
                           </button>
@@ -512,7 +514,7 @@ END:VCARD`;
                           className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors"
                         >
                           <ArrowLeft size={16} />
-                          Back
+                          {t('hireModal.form.back')}
                         </button>
                         {formStep < 4 && (
                           <button
@@ -520,7 +522,7 @@ END:VCARD`;
                             onClick={() => setFormStep(formStep + 1)}
                             className="flex items-center gap-2 text-purple-400 hover:text-purple-300 transition-colors"
                           >
-                            Skip <ArrowRight size={16} />
+                            {t('hireModal.form.skip')} <ArrowRight size={16} />
                           </button>
                         )}
                       </div>
@@ -545,15 +547,15 @@ END:VCARD`;
                     >
                       <CheckCircle size={40} className="text-white" />
                     </motion.div>
-                    <h3 className="text-2xl font-bold text-white mb-2">Message Sent!</h3>
+                    <h3 className="text-2xl font-bold text-white mb-2">{t('hireModal.success.title')}</h3>
                     <p className="text-gray-400 mb-6">
-                      Thank you for reaching out. I'll get back to you within 24 hours.
+                      {t('hireModal.success.message')}
                     </p>
                     <button
                       onClick={handleClose}
                       className="px-6 py-3 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold hover:shadow-lg hover:shadow-purple-500/25 transition-all"
                     >
-                      Close
+                      {t('hireModal.success.close')}
                     </button>
                   </motion.div>
                 )}

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Download, Eye, Rocket, Mail, Phone, MapPin, Send, Github, Linkedin, Instagram, ExternalLink, Briefcase, Code, Award, Calendar, Building2 } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import { useFirestore } from '../hooks/useFirestore';
 import { getProfile } from '../services/firebase/profile.service';
 import { Profile, Project, Skill, Experience } from '../types/firebase.types';
@@ -16,6 +17,7 @@ import { HireMeModal } from '../components/HireMeModal';
 import emailjs from '@emailjs/browser';
 
 export const Home: React.FC = () => {
+  const { t } = useTranslation();
   const [isInitialLoading, setIsInitialLoading] = useState(true);
   const { data: projects, loading: projectsLoading } = useFirestore<Project>('projects');
   const { data: skills, loading: skillsLoading } = useFirestore<Skill>('skills');
@@ -123,20 +125,20 @@ export const Home: React.FC = () => {
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-purple-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-purple-500"></span>
               </span>
-              Available for Freelance
+              {t('hero.available')}
             </div>
 
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight">
-              Hi, I'm <br />
+              {t('hero.greeting')} <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 via-pink-500 to-purple-500 animate-gradient-x">
-                {profile?.name || "M2Dev"}
+                {profile?.name || t('hero.defaultName')}
               </span>
             </h1>
             <h2 className="text-2xl md:text-3xl text-gray-300 mb-8 font-light">
-              {profile?.title || "Full Stack Developer"}
+              {profile?.title || t('hero.defaultTitle')}
             </h2>
             <p className="text-gray-400 text-lg max-w-lg mx-auto lg:mx-0 mb-10 leading-relaxed">
-              {profile?.bio || "Crafting modern, responsive web applications with clean UI, robust backend architecture, and seamless user experiences."}
+              {profile?.bio || t('hero.defaultBio')}
             </p>
 
             <div className="flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start">
@@ -145,14 +147,14 @@ export const Home: React.FC = () => {
                 className="px-8 py-3 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold shadow-lg shadow-purple-500/25 hover:shadow-purple-500/50 transition-all transform hover:-translate-y-1 flex items-center gap-2"
               >
                 <Rocket size={20} />
-                Hire Me
+                {t('hero.hireMe')}
               </button>
               
               {/* CV Download Dropdown */}
               <div className="relative group">
                 <button className="px-8 py-3 rounded-full border border-purple-500/30 bg-white/5 text-white font-semibold hover:bg-white/10 transition-all flex items-center gap-2">
                   <Download size={20} />
-                  Download CV
+                  {t('hero.downloadCV')}
                 </button>
                 <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
                   <div className="bg-[#0a0a1a] border border-purple-500/30 rounded-xl p-2 shadow-xl shadow-purple-500/10 min-w-[160px]">
@@ -175,7 +177,7 @@ export const Home: React.FC = () => {
               </div>
 
               <a href="#projects" className="text-gray-300 hover:text-white flex items-center gap-2 transition-colors">
-                View My Work <Eye size={16} />
+                {t('hero.viewWork')} <Eye size={16} />
               </a>
             </div>
           </motion.div>
@@ -209,7 +211,7 @@ export const Home: React.FC = () => {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">About <span className="text-purple-500">Me</span></h2>
+            <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">{t('about.title')} <span className="text-purple-500">{t('about.titleHighlight')}</span></h2>
             <div className="w-20 h-1 bg-gradient-to-r from-purple-500 to-pink-500 mx-auto rounded-full"></div>
           </motion.div>
 
@@ -241,10 +243,10 @@ export const Home: React.FC = () => {
               viewport={{ once: true }}
             >
               <p className="text-gray-400 text-lg leading-relaxed mb-6">
-                {profile?.bio || "I'm a Full-Stack Developer with hands-on experience building fast, scalable, and responsive web applications using React.js, Node.js, Express, MongoDB, and PostgreSQL/MySQL."}
+                {profile?.bio || t('about.defaultBio1')}
               </p>
               <p className="text-gray-400 text-lg leading-relaxed mb-8">
-                My skill set spans both frontend and backend development, with a strong focus on clean code, smooth user experiences, and animation-driven UI using libraries like Framer Motion.
+                {t('about.defaultBio2')}
               </p>
 
               {/* Stats */}
@@ -252,17 +254,17 @@ export const Home: React.FC = () => {
                 <div className="glass-card p-4 rounded-xl text-center hover:bg-purple-500/10 transition-colors">
                   <Briefcase className="w-8 h-8 text-purple-500 mx-auto mb-2" />
                   <h3 className="text-2xl font-bold text-white">4+</h3>
-                  <p className="text-gray-400 text-sm">Years Experience</p>
+                  <p className="text-gray-400 text-sm">{t('about.yearsExperience')}</p>
                 </div>
                 <div className="glass-card p-4 rounded-xl text-center hover:bg-purple-500/10 transition-colors">
                   <Code className="w-8 h-8 text-pink-500 mx-auto mb-2" />
                   <h3 className="text-2xl font-bold text-white">{projects.length}+</h3>
-                  <p className="text-gray-400 text-sm">Projects Completed</p>
+                  <p className="text-gray-400 text-sm">{t('about.projectsCompleted')}</p>
                 </div>
                 <div className="glass-card p-4 rounded-xl text-center hover:bg-purple-500/10 transition-colors">
                   <Award className="w-8 h-8 text-purple-500 mx-auto mb-2" />
                   <h3 className="text-2xl font-bold text-white">100%</h3>
-                  <p className="text-gray-400 text-sm">Client Satisfaction</p>
+                  <p className="text-gray-400 text-sm">{t('about.clientSatisfaction')}</p>
                 </div>
               </div>
             </motion.div>
@@ -279,8 +281,8 @@ export const Home: React.FC = () => {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">My <span className="text-purple-500">Skills</span></h2>
-            <p className="text-gray-400">Technological stack I work with</p>
+            <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">{t('skills.title')} <span className="text-purple-500">{t('skills.titleHighlight')}</span></h2>
+            <p className="text-gray-400">{t('skills.subtitle')}</p>
           </motion.div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -322,8 +324,8 @@ export const Home: React.FC = () => {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">Work <span className="text-purple-500">Experience</span></h2>
-            <p className="text-gray-400">My professional journey</p>
+            <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">{t('experience.title')} <span className="text-purple-500">{t('experience.titleHighlight')}</span></h2>
+            <p className="text-gray-400">{t('experience.subtitle')}</p>
           </motion.div>
 
           <div className="relative">
@@ -356,14 +358,14 @@ export const Home: React.FC = () => {
                         </div>
                         {exp.current && (
                           <span className="px-3 py-1 text-xs rounded-full bg-green-500/20 text-green-400 border border-green-500/30">
-                            Current
+                            {t('experience.current')}
                           </span>
                         )}
                       </div>
 
                       <div className="flex items-center gap-2 text-gray-500 text-sm mb-4">
                         <Calendar size={14} />
-                        <span>{exp.startDate} - {exp.current ? 'Present' : exp.endDate}</span>
+                        <span>{exp.startDate} - {exp.current ? t('experience.present') : exp.endDate}</span>
                         {exp.location && (
                           <>
                             <span className="mx-2">•</span>
@@ -407,8 +409,8 @@ export const Home: React.FC = () => {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">Featured <span className="text-purple-500">Projects</span></h2>
-            <p className="text-gray-400">A curated collection of my best work</p>
+            <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">{t('projects.title')} <span className="text-purple-500">{t('projects.titleHighlight')}</span></h2>
+            <p className="text-gray-400">{t('projects.subtitle')}</p>
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -473,12 +475,12 @@ export const Home: React.FC = () => {
                   <div className="flex items-center gap-4">
                     {project.demoUrl && (
                       <a href={project.demoUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-sm text-white hover:text-purple-400 transition-colors">
-                        Live Demo <ExternalLink size={14} />
+                        {t('projects.liveDemo')} <ExternalLink size={14} />
                       </a>
                     )}
                     {project.githubUrl && (
                       <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-sm text-gray-400 hover:text-white transition-colors">
-                        <Github size={14} /> Code
+                        <Github size={14} /> {t('projects.code')}
                       </a>
                     )}
                   </div>
@@ -498,8 +500,8 @@ export const Home: React.FC = () => {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">Get In <span className="text-purple-500">Touch</span></h2>
-            <p className="text-gray-400 max-w-2xl mx-auto">Have a project in mind or just want to say hello? Drop me a message and let's create something amazing together.</p>
+            <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">{t('contact.title')} <span className="text-purple-500">{t('contact.titleHighlight')}</span></h2>
+            <p className="text-gray-400 max-w-2xl mx-auto">{t('contact.subtitle')}</p>
           </motion.div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
@@ -511,38 +513,38 @@ export const Home: React.FC = () => {
             >
               <form onSubmit={handleSubmit} className="glass-card p-8 rounded-2xl space-y-6">
                 <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">Name</label>
+                  <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">{t('contact.form.name')}</label>
                   <input
                     type="text"
                     id="name"
                     value={formState.name}
                     onChange={(e) => setFormState({ ...formState, name: e.target.value })}
                     className="w-full bg-[#030014] border border-gray-800 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-all placeholder-gray-600"
-                    placeholder="Your Name"
+                    placeholder={t('contact.form.namePlaceholder')}
                     required
                   />
                 </div>
                 <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">Email</label>
+                  <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">{t('contact.form.email')}</label>
                   <input
                     type="email"
                     id="email"
                     value={formState.email}
                     onChange={(e) => setFormState({ ...formState, email: e.target.value })}
                     className="w-full bg-[#030014] border border-gray-800 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-all placeholder-gray-600"
-                    placeholder="your.email@example.com"
+                    placeholder={t('contact.form.emailPlaceholder')}
                     required
                   />
                 </div>
                 <div>
-                  <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-2">Message</label>
+                  <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-2">{t('contact.form.message')}</label>
                   <textarea
                     id="message"
                     rows={4}
                     value={formState.message}
                     onChange={(e) => setFormState({ ...formState, message: e.target.value })}
                     className="w-full bg-[#030014] border border-gray-800 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-all placeholder-gray-600 resize-none"
-                    placeholder="Tell me about your project..."
+                    placeholder={t('contact.form.messagePlaceholder')}
                     required
                   />
                 </div>
@@ -554,25 +556,25 @@ export const Home: React.FC = () => {
                   {isSubmitting ? (
                     <>
                       <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                      Sending...
+                      {t('contact.form.sending')}
                     </>
                   ) : submitStatus === 'success' ? (
                     <>
-                      ✓ Message Sent!
+                      ✓ {t('contact.form.success')}
                     </>
                   ) : submitStatus === 'error' ? (
                     <>
-                      ✗ Error - Try Again
+                      ✗ {t('contact.form.error')}
                     </>
                   ) : (
                     <>
-                      Send Message <Send size={18} />
+                      {t('contact.form.send')} <Send size={18} />
                     </>
                   )}
                 </button>
                 {submitStatus === 'success' && (
                   <p className="text-green-400 text-sm text-center mt-2">
-                    Thank you! I'll get back to you soon.
+                    {t('contact.form.thankYou')}
                   </p>
                 )}
               </form>
@@ -586,9 +588,9 @@ export const Home: React.FC = () => {
               className="space-y-8"
             >
               <div>
-                <h3 className="text-2xl font-bold text-white mb-6">Let's Connect</h3>
+                <h3 className="text-2xl font-bold text-white mb-6">{t('contact.info.title')}</h3>
                 <p className="text-gray-400 mb-8">
-                  I'm always excited to work on new projects and collaborate with amazing people. Whether you have a specific project in mind or just want to explore possibilities, I'd love to hear from you.
+                  {t('contact.info.description')}
                 </p>
               </div>
 
@@ -599,7 +601,7 @@ export const Home: React.FC = () => {
                       <Mail size={24} />
                     </div>
                     <div>
-                      <p className="text-sm text-gray-400">Email</p>
+                      <p className="text-sm text-gray-400">{t('contact.info.emailLabel')}</p>
                       <p className="text-white font-medium">{profile.email}</p>
                     </div>
                   </div>
@@ -611,7 +613,7 @@ export const Home: React.FC = () => {
                       <Phone size={24} />
                     </div>
                     <div>
-                      <p className="text-sm text-gray-400">Phone</p>
+                      <p className="text-sm text-gray-400">{t('contact.info.phoneLabel')}</p>
                       <p className="text-white font-medium">{profile.phone}</p>
                     </div>
                   </div>
@@ -623,7 +625,7 @@ export const Home: React.FC = () => {
                       <MapPin size={24} />
                     </div>
                     <div>
-                      <p className="text-sm text-gray-400">Location</p>
+                      <p className="text-sm text-gray-400">{t('contact.info.locationLabel')}</p>
                       <p className="text-white font-medium">{profile.location}</p>
                     </div>
                   </div>
@@ -631,7 +633,7 @@ export const Home: React.FC = () => {
               </div>
 
               <div className="pt-8">
-                <h4 className="text-white font-semibold mb-4">Follow Me</h4>
+                <h4 className="text-white font-semibold mb-4">{t('contact.info.followMe')}</h4>
                 <div className="flex gap-4">
                   <a href="#" className="w-10 h-10 rounded-lg bg-gray-800 flex items-center justify-center text-gray-400 hover:bg-purple-600 hover:text-white transition-all">
                     <Github size={20} />

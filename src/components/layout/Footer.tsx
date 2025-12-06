@@ -1,6 +1,9 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 export const Footer: React.FC = () => {
+    const { t } = useTranslation();
+    
     return (
         <footer className="bg-[#020010] py-12 border-t border-gray-900">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -11,23 +14,23 @@ export const Footer: React.FC = () => {
                             M2<span className="text-purple-500">Dev</span>
                         </span>
                         <p className="text-gray-500 mt-2 text-sm max-w-xs">
-                            Building modern, high-performance web experiences through elegant design, clean code, and the latest technologies.
+                            {t('footer.tagline')}
                         </p>
                     </div>
 
                     <div className="flex gap-8 text-sm">
                         <div className="flex flex-col gap-2">
-                            <h4 className="text-white font-semibold mb-2">Quick Links</h4>
-                            <a href="#home" className="text-gray-500 hover:text-purple-400 transition-colors">Home</a>
-                            <a href="#about" className="text-gray-500 hover:text-purple-400 transition-colors">About</a>
-                            <a href="#projects" className="text-gray-500 hover:text-purple-400 transition-colors">Projects</a>
-                            <a href="#contact" className="text-gray-500 hover:text-purple-400 transition-colors">Contact</a>
+                            <h4 className="text-white font-semibold mb-2">{t('footer.quickLinks')}</h4>
+                            <a href="#home" className="text-gray-500 hover:text-purple-400 transition-colors">{t('nav.home')}</a>
+                            <a href="#about" className="text-gray-500 hover:text-purple-400 transition-colors">{t('nav.about')}</a>
+                            <a href="#projects" className="text-gray-500 hover:text-purple-400 transition-colors">{t('nav.projects')}</a>
+                            <a href="#contact" className="text-gray-500 hover:text-purple-400 transition-colors">{t('nav.contact')}</a>
                         </div>
                     </div>
                 </div>
 
                 <div className="mt-12 pt-8 border-t border-gray-900 text-center text-gray-600 text-xs">
-                    <p>© 2025 M2Dev. All rights reserved.</p>
+                    <p>{t('footer.copyright')}</p>
                 </div>
             </div>
         </footer>

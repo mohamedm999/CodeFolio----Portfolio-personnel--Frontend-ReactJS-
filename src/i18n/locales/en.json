@@ -1,0 +1,133 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "skills": "Skills",
+    "experience": "Experience",
+    "projects": "Projects",
+    "contact": "Contact"
+  },
+  "hero": {
+    "available": "Available for Freelance",
+    "greeting": "Hi, I'm",
+    "defaultName": "M2Dev",
+    "defaultTitle": "Full Stack Developer",
+    "defaultBio": "Crafting modern, responsive web applications with clean UI, robust backend architecture, and seamless user experiences.",
+    "hireMe": "Hire Me",
+    "downloadCV": "Download CV",
+    "viewWork": "View My Work"
+  },
+  "about": {
+    "title": "About",
+    "titleHighlight": "Me",
+    "defaultBio1": "I'm a Full-Stack Developer with hands-on experience building fast, scalable, and responsive web applications using React.js, Node.js, Express, MongoDB, and PostgreSQL/MySQL.",
+    "defaultBio2": "My skill set spans both frontend and backend development, with a strong focus on clean code, smooth user experiences, and animation-driven UI using libraries like Framer Motion.",
+    "yearsExperience": "Years Experience",
+    "projectsCompleted": "Projects Completed",
+    "clientSatisfaction": "Client Satisfaction"
+  },
+  "skills": {
+    "title": "My",
+    "titleHighlight": "Skills",
+    "subtitle": "Technological stack I work with"
+  },
+  "experience": {
+    "title": "Work",
+    "titleHighlight": "Experience",
+    "subtitle": "My professional journey",
+    "current": "Current",
+    "present": "Present"
+  },
+  "projects": {
+    "title": "Featured",
+    "titleHighlight": "Projects",
+    "subtitle": "A curated collection of my best work",
+    "liveDemo": "Live Demo",
+    "code": "Code"
+  },
+  "contact": {
+    "title": "Get In",
+    "titleHighlight": "Touch",
+    "subtitle": "Have a project in mind or just want to say hello? Drop me a message and let's create something amazing together.",
+    "form": {
+      "name": "Name",
+      "namePlaceholder": "Your Name",
+      "email": "Email",
+      "emailPlaceholder": "your.email@example.com",
+      "message": "Message",
+      "messagePlaceholder": "Tell me about your project...",
+      "send": "Send Message",
+      "sending": "Sending...",
+      "success": "Message Sent!",
+      "error": "Error - Try Again",
+      "thankYou": "Thank you! I'll get back to you soon."
+    },
+    "info": {
+      "title": "Let's Connect",
+      "description": "I'm always excited to work on new projects and collaborate with amazing people. Whether you have a specific project in mind or just want to explore possibilities, I'd love to hear from you.",
+      "emailLabel": "Email",
+      "phoneLabel": "Phone",
+      "locationLabel": "Location",
+      "followMe": "Follow Me"
+    }
+  },
+  "footer": {
+    "tagline": "Building modern, high-performance web experiences through elegant design, clean code, and the latest technologies.",
+    "quickLinks": "Quick Links",
+    "copyright": "© 2025 M2Dev. All rights reserved."
+  },
+  "hireModal": {
+    "title": "Let's Work",
+    "titleHighlight": "Together",
+    "subtitle": "Choose how you'd like to connect",
+    "sendMessage": "Send Message",
+    "projectInquiry": "Project inquiry",
+    "whatsapp": "WhatsApp",
+    "quickChat": "Quick chat",
+    "scheduleCall": "Schedule Call",
+    "bookMeeting": "Book a meeting",
+    "saveContact": "Save Contact",
+    "downloadVCard": "Download vCard",
+    "reachDirectly": "Or reach me directly",
+    "form": {
+      "projectType": "What type of project?",
+      "budget": "What's your budget?",
+      "timeline": "Project timeline?",
+      "yourDetails": "Your details",
+      "back": "Back",
+      "skip": "Skip"
+    },
+    "projectTypes": {
+      "website": "Website",
+      "webapp": "Web Application",
+      "ecommerce": "E-Commerce",
+      "api": "API / Backend",
+      "other": "Other"
+    },
+    "budgetRanges": {
+      "small": "< 5,000 MAD",
+      "medium": "5,000 - 15,000 MAD",
+      "large": "15,000 - 30,000 MAD",
+      "enterprise": "30,000+ MAD",
+      "discuss": "Let's Discuss"
+    },
+    "timelines": {
+      "urgent": "ASAP",
+      "short": "1-2 Weeks",
+      "medium": "1 Month",
+      "flexible": "Flexible"
+    },
+    "success": {
+      "title": "Message Sent!",
+      "message": "Thank you for reaching out. I'll get back to you within 24 hours.",
+      "close": "Close"
+    }
+  },
+  "loader": {
+    "loading": "Loading Portfolio..."
+  },
+  "common": {
+    "french": "Français",
+    "english": "English"
+  }
+}

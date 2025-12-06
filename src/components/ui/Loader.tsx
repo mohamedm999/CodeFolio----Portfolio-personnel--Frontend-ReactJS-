@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 
 interface LoaderProps {
     onLoadingComplete: () => void;
@@ -9,6 +10,7 @@ interface LoaderProps {
 const CRITICAL_IMAGES = ['/me.png', '/logo-Photoroom.png'];
 
 export const Loader: React.FC<LoaderProps> = ({ onLoadingComplete }) => {
+    const { t } = useTranslation();
     const [progress, setProgress] = useState(0);
     const [imagesLoaded, setImagesLoaded] = useState(false);
 
@@ -75,7 +77,7 @@ export const Loader: React.FC<LoaderProps> = ({ onLoadingComplete }) => {
                 <h1 className="text-4xl md:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600 mb-4">
                     M2Dev
                 </h1>
-                <p className="text-gray-400 text-sm mb-8 tracking-wider">Loading Portfolio...</p>
+                <p className="text-gray-400 text-sm mb-8 tracking-wider">{t('loader.loading')}</p>
 
                 <div className="w-64 h-1 bg-gray-800 rounded-full overflow-hidden mx-auto">
                     <motion.div
