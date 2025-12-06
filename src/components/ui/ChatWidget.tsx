@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { MessageCircle, X, Send, Sparkles, Loader2 } from 'lucide-react';
+import { sendMessageToGemini } from '../../services/gemini.service';
 
 interface Message {
     role: 'user' | 'assistant';
@@ -10,7 +11,7 @@ interface Message {
 export const ChatWidget: React.FC = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [messages, setMessages] = useState<Message[]>([
-        { role: 'assistant', content: "Hi! I'm the AI assistant for M2Dev. How can I help you today?" }
+        { role: 'assistant', content: "Hi! 👋 I'm the AI assistant for M2Dev's portfolio. Ask me about Mohamed's skills, projects, or how to get in touch!" }
     ]);
     const [inputValue, setInputValue] = useState('');
     const [isLoading, setIsLoading] = useState(false);
@@ -29,23 +30,23 @@ export const ChatWidget: React.FC = () => {
 
         const userMessage = inputValue.trim();
         setInputValue('');
-        setMessages(prev => [...prev, { role: 'user', content: userMessage }]);
+        const newMessages: Message[] = [...messages, { role: 'user', content: userMessage }];
+        setMessages(newMessages);
         setIsLoading(true);
 
-        // Simulate AI response
-        setTimeout(() => {
-            const responses = [
-                "That's interesting! Tell me more.",
-                "I can definitely help with that.",
-                "This portfolio is built with React and Tailwind CSS.",
-                "Feel free to check out the projects section!",
-                "You can contact me via the form above."
-            ];
-            const randomResponse = responses[Math.floor(Math.random() * responses.length)];
-
-            setMessages(prev => [...prev, { role: 'assistant', content: randomResponse }]);
+        try {
+            // Call Gemini API
+            const response = await sendMessageToGemini(userMessage, newMessages);
+            setMessages(prev => [...prev, { role: 'assistant', content: response }]);
+        } catch (error) {
+            console.error('Chat error:', error);
+            setMessages(prev => [...prev, { 
+                role: 'assistant', 
+                content: "Sorry, I'm having trouble right now. Please try the contact form to reach Mohamed!" 
+            }]);
+        } finally {
             setIsLoading(false);
-        }, 1500);
+        }
     };
 
     const handleKeyPress = (e: React.KeyboardEvent) => {
@@ -138,7 +139,7 @@ export const ChatWidget: React.FC = () => {
                                 </button>
                             </div>
                             <p className="text-[10px] text-gray-600 text-center mt-2">
-                                Powered by Gemini 2.5 Flash
+                                Powered by Gemini AI
                             </p>
                         </div>
                     </motion.div>
