@@ -13,6 +13,7 @@ import { Loader } from '../components/ui/Loader';
 import { CommandConsole } from '../components/CommandConsole';
 import { OptimizedImage } from '../components/ui/OptimizedImage';
 import { HireMeModal } from '../components/HireMeModal';
+import emailjs from '@emailjs/browser';
 
 export const Home: React.FC = () => {
   const [isInitialLoading, setIsInitialLoading] = useState(true);
@@ -43,11 +44,49 @@ export const Home: React.FC = () => {
 
   const loading = projectsLoading || skillsLoading || experiencesLoading || profileLoading;
   const error = profileError;
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    alert('Thank you for your message!');
-    setFormState({ name: '', email: '', message: '' });
+    setIsSubmitting(true);
+    setSubmitStatus('idle');
+
+    try {
+      const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+      const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+      const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+
+      if (serviceId && templateId && publicKey) {
+        await emailjs.send(
+          serviceId,
+          templateId,
+          {
+            from_name: formState.name,
+            from_email: formState.email,
+            message: formState.message,
+            to_name: profile?.name || 'Mohamed Moukhtari',
+          },
+          publicKey
+        );
+        setSubmitStatus('success');
+        setFormState({ name: '', email: '', message: '' });
+      } else {
+        // Fallback to mailto
+        const subject = encodeURIComponent(`Contact from ${formState.name}`);
+        const body = encodeURIComponent(`${formState.message}\n\nFrom: ${formState.name}\nEmail: ${formState.email}`);
+        window.open(`mailto:moukhtari.mohamed.dev@gmail.com?subject=${subject}&body=${body}`);
+        setSubmitStatus('success');
+        setFormState({ name: '', email: '', message: '' });
+      }
+    } catch (error) {
+      console.error('Error sending email:', error);
+      setSubmitStatus('error');
+    } finally {
+      setIsSubmitting(false);
+      // Reset status after 5 seconds
+      setTimeout(() => setSubmitStatus('idle'), 5000);
+    }
   };
 
   // Show animated loader on first visit
@@ -507,9 +546,35 @@ export const Home: React.FC = () => {
                     required
                   />
                 </div>
-                <button type="submit" className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold py-4 rounded-lg shadow-lg hover:shadow-purple-500/25 transition-all transform hover:-translate-y-1 flex items-center justify-center gap-2">
-                  Send Message <Send size={18} />
+                <button 
+                  type="submit" 
+                  disabled={isSubmitting}
+                  className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold py-4 rounded-lg shadow-lg hover:shadow-purple-500/25 transition-all transform hover:-translate-y-1 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+                >
+                  {isSubmitting ? (
+                    <>
+                      <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                      Sending...
+                    </>
+                  ) : submitStatus === 'success' ? (
+                    <>
+                      ✓ Message Sent!
+                    </>
+                  ) : submitStatus === 'error' ? (
+                    <>
+                      ✗ Error - Try Again
+                    </>
+                  ) : (
+                    <>
+                      Send Message <Send size={18} />
+                    </>
+                  )}
                 </button>
+                {submitStatus === 'success' && (
+                  <p className="text-green-400 text-sm text-center mt-2">
+                    Thank you! I'll get back to you soon.
+                  </p>
+                )}
               </form>
             </motion.div>
 
