@@ -11,6 +11,7 @@ import { Footer } from '../components/layout/Footer';
 import { ChatWidget } from '../components/ui/ChatWidget';
 import { Loader } from '../components/ui/Loader';
 import { CommandConsole } from '../components/CommandConsole';
+import { OptimizedImage } from '../components/ui/OptimizedImage';
 
 export const Home: React.FC = () => {
   const [isInitialLoading, setIsInitialLoading] = useState(true);
@@ -144,10 +145,11 @@ export const Home: React.FC = () => {
           >
             <div className="relative w-full max-w-[750px] lg:-mb-20">
               <div className="absolute inset-0 bg-gradient-to-tr from-purple-600 to-pink-600 rounded-full blur-[80px] opacity-40 animate-pulse"></div>
-              <img
-                src={"/me.png"}
+              <OptimizedImage
+                src="/me.png"
                 alt={profile?.name || "Developer"}
                 className="relative w-full h-auto object-contain z-10 drop-shadow-2xl"
+                priority={true}
               />
             </div>
           </motion.div>
@@ -179,7 +181,7 @@ export const Home: React.FC = () => {
                 <div className="absolute inset-0 border-2 border-purple-500 rounded-full animate-[spin_10s_linear_infinite]"></div>
                 <div className="absolute inset-2 border-2 border-pink-500 rounded-full animate-[spin_15s_linear_infinite_reverse]"></div>
                 <div className="absolute inset-4 rounded-full overflow-hidden bg-gray-900">
-                  <img
+                  <OptimizedImage
                     src={profile?.avatar || "/me.png"}
                     alt="Profile"
                     className="w-full h-full object-cover opacity-80 hover:opacity-100 transition-opacity duration-500"

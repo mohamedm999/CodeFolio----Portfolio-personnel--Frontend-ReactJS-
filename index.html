@@ -2,10 +2,18 @@
 <html lang="fr">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/logo.png" />
-    <link rel="apple-touch-icon" href="/logo.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/logo-Photoroom.png" />
+    <link rel="apple-touch-icon" href="/logo-Photoroom.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Portfolio Personnel</title>
+    <title>Portfolio Personnel | M2Dev</title>
+    
+    <!-- Preload Critical Images -->
+    <link rel="preload" as="image" href="/me.png" fetchpriority="high" />
+    <link rel="preload" as="image" href="/logo-Photoroom.png" />
+    
+    <!-- DNS Prefetch for external resources -->
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
   </head>
   <body>
     <div id="root"></div>

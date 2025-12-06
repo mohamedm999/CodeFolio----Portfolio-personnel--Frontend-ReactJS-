@@ -5,15 +5,45 @@ interface LoaderProps {
     onLoadingComplete: () => void;
 }
 
+// Critical images to preload during loader animation
+const CRITICAL_IMAGES = ['/me.png', '/logo-Photoroom.png'];
+
 export const Loader: React.FC<LoaderProps> = ({ onLoadingComplete }) => {
     const [progress, setProgress] = useState(0);
+    const [imagesLoaded, setImagesLoaded] = useState(false);
+
+    // Preload critical images
+    useEffect(() => {
+        let loadedCount = 0;
+        const totalImages = CRITICAL_IMAGES.length;
+
+        CRITICAL_IMAGES.forEach((src) => {
+            const img = new Image();
+            img.src = src;
+            img.onload = () => {
+                loadedCount++;
+                if (loadedCount === totalImages) {
+                    setImagesLoaded(true);
+                }
+            };
+            img.onerror = () => {
+                loadedCount++;
+                if (loadedCount === totalImages) {
+                    setImagesLoaded(true);
+                }
+            };
+        });
+    }, []);
 
     useEffect(() => {
         const timer = setInterval(() => {
             setProgress((prev) => {
                 if (prev >= 100) {
                     clearInterval(timer);
-                    setTimeout(onLoadingComplete, 500); // Slight delay after 100%
+                    // Only complete when both progress is 100% AND images are loaded
+                    if (imagesLoaded) {
+                        setTimeout(onLoadingComplete, 300);
+                    }
                     return 100;
                 }
                 return prev + 2; // Speed of loading
@@ -21,7 +51,14 @@ export const Loader: React.FC<LoaderProps> = ({ onLoadingComplete }) => {
         }, 30);
 
         return () => clearInterval(timer);
-    }, [onLoadingComplete]);
+    }, [onLoadingComplete, imagesLoaded]);
+
+    // If progress hits 100 but images aren't loaded yet, wait for them
+    useEffect(() => {
+        if (progress >= 100 && imagesLoaded) {
+            setTimeout(onLoadingComplete, 300);
+        }
+    }, [progress, imagesLoaded, onLoadingComplete]);
 
     return (
         <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#030014]">

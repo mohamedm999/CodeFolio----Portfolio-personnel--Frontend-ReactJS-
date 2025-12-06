@@ -78,3 +78,21 @@ body {
   background-size: 200% auto;
   animation: gradient-x 3s ease infinite;
 }
+
+/* Shimmer Animation for Image Loading */
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.animate-shimmer {
+  animation: shimmer 1.5s infinite;
+}
+
+.rounded-inherit {
+  border-radius: inherit;
+}
