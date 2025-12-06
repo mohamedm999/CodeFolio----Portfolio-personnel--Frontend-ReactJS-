@@ -102,10 +102,33 @@ export const Home: React.FC = () => {
                 <Rocket size={20} />
                 Hire Me
               </a>
-              <button className="px-8 py-3 rounded-full border border-purple-500/30 bg-white/5 text-white font-semibold hover:bg-white/10 transition-all flex items-center gap-2">
-                <Download size={20} />
-                Download CV
-              </button>
+              
+              {/* CV Download Dropdown */}
+              <div className="relative group">
+                <button className="px-8 py-3 rounded-full border border-purple-500/30 bg-white/5 text-white font-semibold hover:bg-white/10 transition-all flex items-center gap-2">
+                  <Download size={20} />
+                  Download CV
+                </button>
+                <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+                  <div className="bg-[#0a0a1a] border border-purple-500/30 rounded-xl p-2 shadow-xl shadow-purple-500/10 min-w-[160px]">
+                    <a 
+                      href="/cv/Mohamed_Moukhtari_CV_FR.pdf" 
+                      download="Mohamed_Moukhtari_CV_FR.pdf"
+                      className="flex items-center gap-3 px-4 py-2 text-gray-300 hover:text-white hover:bg-purple-500/20 rounded-lg transition-all"
+                    >
+                      🇫🇷 Français
+                    </a>
+                    <a 
+                      href="/cv/Mohamed_Moukhtari_CV_EN.pdf" 
+                      download="Mohamed_Moukhtari_CV_EN.pdf"
+                      className="flex items-center gap-3 px-4 py-2 text-gray-300 hover:text-white hover:bg-purple-500/20 rounded-lg transition-all"
+                    >
+                      🇬🇧 English
+                    </a>
+                  </div>
+                </div>
+              </div>
+
               <a href="#projects" className="text-gray-300 hover:text-white flex items-center gap-2 transition-colors">
                 View My Work <Eye size={16} />
               </a>
